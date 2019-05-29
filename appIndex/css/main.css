@@ -1,0 +1,10 @@
+.header-row {
+    border-collapse: separate;
+    border-spacing: 3px 0;
+    /*display: table;*/
+}
+
+.header-row > div {
+    display: table-cell;
+    vertical-align: bottom;
+}

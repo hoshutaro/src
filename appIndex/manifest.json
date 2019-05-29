@@ -1,0 +1,36 @@
+{
+    "manifest_version": 1,
+    "version": 1,
+    "type": "APP",
+    "name": {
+        "ja": "TEST",
+        "en": "-"
+    },
+    "description": {
+        "ja": "TEST",
+        "en": "-"
+    },
+    "icon": "img/app_icon.png",
+    "desktop": {
+        "js": [
+            "js/kintone-ui-component.min.js",
+            "js/main.js"
+            ],
+        "css": [
+            "css/kintone-ui-component.min.css",
+            "css/main.css"
+            ]
+        
+    },
+    "config": {
+        "html": "https://hoshutaro.github.io/appIndex/html/config.html",
+        "js": [
+            "https://hoshutaro.github.io/appIndex/js/kintone-ui-component.min.js",
+            "https://hoshutaro.github.io/appIndex/js/config.js"
+            ],
+        "css": [
+            "https://hoshutaro.github.io/appIndex/css/kintone-ui-component.min.css",
+            "https://hoshutaro.github.io/appIndex/css/51-modern-default.css"
+            ]
+    }
+}
