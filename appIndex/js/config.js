@@ -107,6 +107,9 @@ const addSearchConfig = (FIELDS) => {
     let body = document.getElementById(BODY_ID);
     let cont = document.createElement('div');
     
+    cont.innerHTML = `<div class="kintoneplugin-label">検索機能</div>
+                      <div class="kintoneplugin-title">検索対象フィールド</div>`;
+    
     let prop = FIELDS.properties;
     
     for(let n in prop) {
