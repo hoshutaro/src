@@ -122,7 +122,7 @@ const addSearchConfig = (FIELDS) => {
             elm.innerHTML = `<div class="kintoneplugin-input-checkbox">
                                  <span class="kintoneplugin-input-checkbox-item">
                                      <input type="checkbox" name="checkbox" value="0" id="${elmid}" checked="">
-                                     <label for="${elmid}">${prop[n].label}</label>
+                                     <label for="${elmid}">${prop[n].label} (${prop[n].code})</label>
                                  </span>
                              </div>`;
             cont.appendChild(elm);
