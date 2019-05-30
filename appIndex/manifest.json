@@ -23,14 +23,14 @@
         
     },
     "config": {
-        "html": "https://hoshutaro.github.io/appIndex/html/config.html",
+        "html": "https://hoshutaro.github.io/src/appIndex/html/config.html",
         "js": [
-            "https://hoshutaro.github.io/appIndex/js/kintone-ui-component.min.js",
-            "https://hoshutaro.github.io/appIndex/js/config.js"
+            "https://hoshutaro.github.io/src/appIndex/js/kintone-ui-component.min.js",
+            "https://hoshutaro.github.io/src/appIndex/js/config.js"
             ],
         "css": [
-            "https://hoshutaro.github.io/appIndex/css/kintone-ui-component.min.css",
-            "https://hoshutaro.github.io/appIndex/css/51-modern-default.css"
+            "https://hoshutaro.github.io/src/appIndex/css/kintone-ui-component.min.css",
+            "https://hoshutaro.github.io/src/appIndex/css/51-modern-default.css"
             ]
     }
 }
