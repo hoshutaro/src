@@ -23,7 +23,7 @@
         
     },
     "config": {
-        "html": "https://hoshutaro.github.io/src/appIndex/html/config.html",
+        "html": "html/config.html",
         "js": [
             "https://hoshutaro.github.io/src/appIndex/js/kintone-ui-component.min.js",
             "https://hoshutaro.github.io/src/appIndex/js/config.js"

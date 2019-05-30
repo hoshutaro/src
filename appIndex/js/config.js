@@ -3,8 +3,11 @@
 /**
  * 共有変数
  */
-const APPID = kintone.app.getId();
+const APP_ID = kintone.app.getId();
 const PLUGIN_ID = 'bojikainnoigicndgjiadfanijcldabf';
+const BODY_ID = 'main';
+
+
 let config = {};
 let config_saved = kintone.plugin.app.getConfig('bojikainnoigicndgjiadfanijcldabf');
 
@@ -93,15 +96,37 @@ const saveConfig = () => {
     return;
 }
 
+
+/**
+ * 検索機能コンフィグ生成
+ */
+const addSearchConfig = () => {
+    console.log(log('run addSearchConfig()'));
+    
+    let body = document.getElementById(BODY_ID);
+    let cont = document.createElement('div');
+    
+    cont.innerHTML = 'hogehoge';
+    
+    body.appendChild(cont);
+    
+    return;
+}
+
+
+
 /**
  * 非同期処理
  */
 const asyncfunctions = async () => {
-    console.log(log('run asyncfunctions'));
+    console.log(log('run asyncfunctions()'));
     
-    let FIELDS = await getFormFields();
+    // 検索機能コンフィグ
+    await addSearchConfig();
     
-    addSearchTargetFields(FIELDS);
+    //let FIELDS = await getFormFields();
+    
+    //addSearchTargetFields(FIELDS);
     
     return;
 }
