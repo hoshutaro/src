@@ -27,21 +27,6 @@ const log = (str) => {
     return `${year}/${month}/${day} ${hour}:${minute}:${second}.${mSecond} ${str}`;
 }
 
-/**
- * フォームフィールド一覧取得
- */
-const getFormFields = async () => {
-    console.log(log('run getFormFields'));
-    
-    let body = {
-        'app': APPID
-    };
-    
-    let result = await kintone.api('/k/v1/app/form/fields', 'GET', body);
-    console.log(result);
-    
-    return result;
-}
 
 
 /**
@@ -96,17 +81,54 @@ const saveConfig = () => {
     return;
 }
 
+/**
+ * フォームフィールド一覧取得
+ */
+const getFormFields = async () => {
+    console.log(log('run getFormFields()'));
+    
+    let body = {
+        'app': APP_ID
+    };
+    
+    let result = await kintone.api('/k/v1/app/form/fields', 'GET', body);
+    console.log(result);
+    
+    return result;
+}
+
 
 /**
  * 検索機能コンフィグ生成
  */
-const addSearchConfig = () => {
+const addSearchConfig = (FIELDS) => {
     console.log(log('run addSearchConfig()'));
     
     let body = document.getElementById(BODY_ID);
     let cont = document.createElement('div');
     
-    cont.innerHTML = 'hogehoge';
+    let prop = FIELDS.properties;
+    
+    for(let n in prop) {
+        // Kintone仕様で検索対象にできるフィールドタイプ
+        let arr = ['SINGLE_LINE_TEXT', 'MULTI_LINE_TEXT'];
+        if(arr.includes(prop[n].type)) {
+            // 要素生成
+            let elm = document.createElement('p');
+            let elmid = `search-${prop[n].code}`;
+            elm.innerHTML = `<div class="kintoneplugin-input-checkbox">
+                                 <span class="kintoneplugin-input-checkbox-item">
+                                     <input type="checkbox" name="checkbox" value="0" id="${elmid}" checked="">
+                                     <label for="${elmid}">${prop[n].label}</label>
+                                 </span>
+                             </div>`;
+            cont.appendChild(elm);
+            //config[`search-${prop[n].code}`] = '';
+            
+            // 初期値設定
+            
+        }
+    }
     
     body.appendChild(cont);
     
@@ -121,10 +143,11 @@ const addSearchConfig = () => {
 const asyncfunctions = async () => {
     console.log(log('run asyncfunctions()'));
     
-    // 検索機能コンフィグ
-    await addSearchConfig();
+    // アプリ設定値取得
+    let FIELDS = await getFormFields();
     
-    //let FIELDS = await getFormFields();
+    // 検索機能コンフィグ
+    await addSearchConfig(FIELDS);
     
     //addSearchTargetFields(FIELDS);
     
