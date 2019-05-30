@@ -150,6 +150,8 @@ const addSaveButton = () => {
     cont.innerHTML = `<button class="kintoneplugin-button-dialog-ok" onClick="saveConfig()">Save</button>
                       <button class="kintoneplugin-button-dialog-cancel">Cancel</button>`;
     
+    body.appendChild(cont);
+    
     return;
 }
 
