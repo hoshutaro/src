@@ -138,7 +138,20 @@ const addSearchConfig = (FIELDS) => {
     return;
 }
 
-
+/**
+ * 保存ボタン設置
+ */
+const addSaveButton = () => {
+    console.log(log('run addSaveButton()'));
+    
+    let body = document.getElementById(BODY_ID);
+    let cont = document.createElement('div');
+    
+    cont.innerHTML = `<button class="kintoneplugin-button-dialog-ok" onClick="saveConfig()">Save</button>
+                      <button class="kintoneplugin-button-dialog-cancel">Cancel</button>`;
+    
+    return;
+}
 
 /**
  * 非同期処理
@@ -152,7 +165,8 @@ const asyncfunctions = async () => {
     // 検索機能コンフィグ
     await addSearchConfig(FIELDS);
     
-    //addSearchTargetFields(FIELDS);
+    // 保存ボタン
+    await addSaveButton();
     
     return;
 }
