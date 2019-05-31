@@ -119,6 +119,8 @@ const doSearch = async () => {
             query += `${search_target[i]} like "${txt}"`;
         }
         document.location = `${location.origin}${location.pathname}${encodeURI(query)}`;
+    } else {
+        document.location = `${location.origin}${location.pathname}`;
     }
     
     return;
