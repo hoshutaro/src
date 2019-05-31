@@ -155,7 +155,7 @@ const saveConfig = () => {
     let nodes = document.getElementsByName(CONF_ID_SEARCH);
     for(let i=0; i<nodes.length; i++){
         if(nodes[i].checked){
-            config[CONF_ID_SEARCH].add(nodes[i].id);
+            config[CONF_ID_SEARCH].push(nodes[i].id);
         }
     }
     console.log(config)
