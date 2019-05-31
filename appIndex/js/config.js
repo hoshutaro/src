@@ -142,10 +142,12 @@ const addSearchConfig = (FIELDS, SAVEDCONFIG) => {
     
     // 既存設定値を反映
     let defVal = SAVEDCONFIG[CONF_ID_SEARCH];
-    for(let i=0; i<defVal.length; i++){
-        document.getElementById(defVal[i]).checked = true;
+    if(defVal != undefined){
+        for(let i=0; i<defVal.length; i++){
+            document.getElementById(defVal[i]).checked = true;
+        }
     }
-    
+
     body.appendChild(cont);
     
     return;
