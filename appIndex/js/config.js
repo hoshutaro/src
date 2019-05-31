@@ -10,8 +10,36 @@ const BODY_ID   = 'main'; // 描画対象div
 const CONF_ID_SEARCH = 'search'; // 検索機能ID
 
 
-let config = {};
-let config_saved = kintone.plugin.app.getConfig('bojikainnoigicndgjiadfanijcldabf');
+/***********************************************************************************************************************
+ *
+ * 既存パラメータ取得関連
+ * 
+ * ********************************************************************************************************************/
+// コンフィグ取得
+const getConfig = async () => {
+    console.log(log('run getConfig()'));
+    
+    let config = JSON.parse(kintone.plugin.app.getConfig('bojikainnoigicndgjiadfanijcldabf'));
+    
+    return config;
+}
+ 
+// フォームフィールド一覧取得
+const getFormFields = async () => {
+    console.log(log('run getFormFields()'));
+    
+    let body = {
+        'app': APP_ID
+    };
+    
+    let result = await kintone.api('/k/v1/app/form/fields', 'GET', body);
+    console.log(result);
+    
+    return result;
+}
+
+
+
 
 /**
  *  ログ表示
@@ -68,27 +96,15 @@ const addSearchTargetFields = (FIELDS) => {
 
 
 
-/**
- * フォームフィールド一覧取得
- */
-const getFormFields = async () => {
-    console.log(log('run getFormFields()'));
-    
-    let body = {
-        'app': APP_ID
-    };
-    
-    let result = await kintone.api('/k/v1/app/form/fields', 'GET', body);
-    console.log(result);
-    
-    return result;
-}
 
 
-/**
- * 検索機能コンフィグ生成
- */
-const addSearchConfig = (FIELDS) => {
+/***********************************************************************************************************************
+ *
+ * 検索機能関連
+ * 
+ * ********************************************************************************************************************/
+// 検索コンフィグ追加
+const addSearchConfig = (FIELDS, SAVEDCONFIG) => {
     console.log(log('run addSearchConfig()'));
     
     let body = document.getElementById(BODY_ID);
@@ -108,16 +124,20 @@ const addSearchConfig = (FIELDS) => {
             let elmid = `search-${prop[n].code}`;
             elm.innerHTML = `<div class="kintoneplugin-input-checkbox">
                                  <span class="kintoneplugin-input-checkbox-item">
-                                     <input type="checkbox" name="${CONF_ID_SEARCH}" value="0" id="${elmid}" checked="">
+                                     <input type="checkbox" name="${CONF_ID_SEARCH}" value="0" id="${elmid}">
                                      <label for="${elmid}">${prop[n].label} (${prop[n].code})</label>
                                  </span>
                              </div>`;
             cont.appendChild(elm);
             //config[`search-${prop[n].code}`] = '';
-            
-            // 初期値設定
-            
+
         }
+    }
+    
+    // 既存設定値を反映
+    let defVal = SAVEDCONFIG[CONF_ID_SEARCH];
+    for(let i=0; i<defVal.length; i++){
+        document.getElementById(defVal[i]).checked = true;
     }
     
     body.appendChild(cont);
@@ -158,7 +178,10 @@ const saveConfig = () => {
             config[CONF_ID_SEARCH].push(nodes[i].id);
         }
     }
-    console.log(config)
+    
+    console.log(config);
+    kintone.plugin.app.setConfig(JSON.stringify(config, null, 4));
+    
     return;
 }
 
@@ -172,10 +195,11 @@ const asyncfunctions = async () => {
     console.log(log('run asyncfunctions()'));
     
     // アプリ設定値取得
-    let FIELDS = await getFormFields();
+    const SAVEDCONFIG = await getConfig();
+    const FIELDS = await getFormFields();
     
     // 検索機能コンフィグ
-    await addSearchConfig(FIELDS);
+    await addSearchConfig(FIELDS, SAVEDCONFIG);
     
     // 保存ボタン設置
     await addSaveButton();
