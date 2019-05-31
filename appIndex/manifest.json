@@ -18,6 +18,7 @@
             ],
         "css": [
             "https://hoshutaro.github.io/src/appIndex/css/kintone-ui-component.min.css",
+            "https://hoshutaro.github.io/src/appIndex/css/51-modern-default.css",
             "https://hoshutaro.github.io/src/appIndex/css/main.css"
             ]
         

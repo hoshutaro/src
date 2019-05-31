@@ -42,7 +42,7 @@ const addSearchForm = (HEADER) => {
         
         let cont = document.createElement('div');
         cont.innerHTML = `<div class="kintoneplugin-input-outer">
-                              <input class="kintoneplugin-input-text" type="text">
+                              <input class="kintoneplugin-input-text" type="text" placeholder="キーワード検索">
                           </div>`;
         
         
