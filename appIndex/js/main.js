@@ -73,31 +73,9 @@ const addSearchForm = (HEADER) => {
         
         let cont = document.createElement('div');
         cont.innerHTML = `<div class="kintoneplugin-input-outer">
-                              <input class="kintoneplugin-input-text" type="text" placeholder="検索文字を入力" id="${CONF_ID_SEARCH}">
+                              <input class="kintoneplugin-input-text" type="text" placeholder="検索文字を入力" id="${CONF_ID_SEARCH}" onkeydown="onEnter()">
                           </div>
                           <button class="kintoneplugin-button-dialog-ok" onClick="doSearch()" style="min-width: 60px;">検索</button>`;
-        
-        
-//        let text = new kintoneUIComponent.Text();
-//        let btn = new kintoneUIComponent.IconButton({type: 'right', color: 'blue'})
-//        
-//        let df = document.createDocumentFragment();
-//        df.appendChild(text.render());
-//        df.appendChild(btn.render());
-//        
-//        // 検索機能
-//        btn.on('click', () => {
-//            console.log(log(`search: ${text.getValue()}`));
-//            if(text.getValue() != undefined){
-//                let keyword = text.getValue();
-//                let query = `?query=msbox like "${keyword}"`;
-//                
-//                document.location = `${location.origin}${location.pathname}${encodeURI(query)}`;
-//            }
-//            return;
-//        });
-//        
-//        HEADER.appendChild(df);
         
         HEADER.appendChild(cont);
     }
@@ -126,15 +104,20 @@ const doSearch = async () => {
     return;
 }
 
+// Enterキーで検索実行
+const onEnter = () => {
+    if(window.event.keyCode == 13){
+        doSearch();
+    }
+    return;
+}
+
 /***********************************************************************************************************************
  *
  * メイン処理
  * 
  * ********************************************************************************************************************/
 console.log(log('run main.js'));
-
-
-
 
 // レコード一覧画面
 kintone.events.on('app.record.index.show', (event) => {

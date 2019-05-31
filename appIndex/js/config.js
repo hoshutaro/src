@@ -90,8 +90,6 @@ const addSearchConfig = (FIELDS) => {
                                  </span>
                              </div>`;
             cont.appendChild(elm);
-            //config[`search-${prop[n].code}`] = '';
-
         }
     }
 
