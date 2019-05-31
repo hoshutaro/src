@@ -19,8 +19,13 @@ const CONF_ID_SEARCH = 'search';  // 検索機能ID
 // コンフィグ取得
 const getConfig = async () => {
     console.log(log('run getConfig()'));
-
-    let config = JSON.parse(kintone.plugin.app.getConfig('bojikainnoigicndgjiadfanijcldabf')[CONF_ID_KEY]);
+    
+    let config = {};
+    
+    let val = kintone.plugin.app.getConfig('bojikainnoigicndgjiadfanijcldabf')[CONF_ID_KEY];
+    if(val != undefined){
+        config = JSON.parse(val);
+    }
     
     return config;
 }
