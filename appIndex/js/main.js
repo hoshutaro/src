@@ -3,7 +3,13 @@
 /**
  * 固定値
  */
+const CONF_ID_KEY    = 'confkey'; // Kintone保存用ID
 const CONF_ID_SEARCH = 'search';  // 検索機能ID
+
+/**
+ * 共有変数
+ */
+
 
 /**
  *  ログ表示
@@ -20,6 +26,26 @@ const log = (str) => {
     
     return `${year}/${month}/${day} ${hour}:${minute}:${second}.${mSecond} ${str}`;
 }
+
+/***********************************************************************************************************************
+ *
+ * 既存パラメータ取得関連
+ * 
+ * ********************************************************************************************************************/
+// コンフィグ取得
+const getConfig = async () => {
+    console.log(log('run getConfig()'));
+    
+    let config = {};
+    
+    let val = kintone.plugin.app.getConfig('bojikainnoigicndgjiadfanijcldabf')[CONF_ID_KEY];
+    if(val != undefined){
+        config = JSON.parse(val);
+    }
+    
+    return config;
+}
+
 /***********************************************************************************************************************
  *
  * ヘッダースペース関連
@@ -83,7 +109,16 @@ const doSearch = () => {
     console.log(log('run doSearch()'));
     
     let txt = document.getElementById(CONF_ID_SEARCH).value;
-    console.log(txt);
+    if(txt != ''){
+        const search_target = getConfig()[CONF_ID_SEARCH];
+        let query = '?query=';
+        
+        for(let i=0; search_target.length; i++){
+            if(i>0){query += ' or ';}
+            query += `${search_target[i]} like "${txt}"`;
+        }
+        document.location = `${location.origin}${location.pathname}${encodeURI(query)}`;
+    }
     
     return;
 }
@@ -94,6 +129,7 @@ const doSearch = () => {
  * 
  * ********************************************************************************************************************/
 console.log(log('run main.js'));
+
 
 
 
@@ -108,7 +144,7 @@ kintone.events.on('app.record.index.show', (event) => {
 });
 const appRecordIndexShow = async () => {
     const HEADER = await kintone.app.getHeaderMenuSpaceElement();
-    
+
     // ヘッダースペース修正
     await editHeaderSpace(HEADER);
     // 検索フォーム生成
