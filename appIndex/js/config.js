@@ -9,6 +9,7 @@ const BODY_ID   = 'main'; // 描画対象div
 
 const CONF_ID_KEY    = 'confkey'; // Kintone保存用ID
 const CONF_ID_SEARCH = 'search';  // 検索機能ID
+const CONF_ID_COLOR  = 'color';   // カラー変更機能ID
 
 /**
  *  ログ表示
@@ -122,7 +123,7 @@ const addChangeColorConfig = (FIELDS) => {
     
     let elm = document.createElement('p');
     
-    elm.innerHTML = `<table class="kintoneplugin-table">
+    elm.innerHTML = `<table class="kintoneplugin-table" id="${CONF_ID_COLOR}">
                        <thead>
                            <tr>
                                <th class="kintoneplugin-table-th"><span class="title">優先順位</span></th>
@@ -134,7 +135,7 @@ const addChangeColorConfig = (FIELDS) => {
                        <tbody>
                            <tr>
                                <td>
-                                   <div class="kintoneplugin-title">####</div>
+                                   <div name="priority"></div>
                                </td>
                                <td>
                                    <div class="kintoneplugin-select-outer">
@@ -218,6 +219,9 @@ const saveConfig = () => {
             config[CONF_ID_SEARCH].push(nodes[i].id);
         }
     }
+    
+    // カラー変更条件式
+    
     
     console.log(config);
     
