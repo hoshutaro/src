@@ -1,6 +1,11 @@
 'use strict';
 
 /**
+ * 固定値
+ */
+const CONF_ID_SEARCH = 'search';  // 検索機能ID
+
+/**
  *  ログ表示
  */
 const log = (str) => {
@@ -42,9 +47,9 @@ const addSearchForm = (HEADER) => {
         
         let cont = document.createElement('div');
         cont.innerHTML = `<div class="kintoneplugin-input-outer">
-                              <input class="kintoneplugin-input-text" type="text" placeholder="検索文字を入力">
+                              <input class="kintoneplugin-input-text" type="text" placeholder="検索文字を入力" id="${CONF_ID_SEARCH}">
                           </div>
-                          <button class="kintoneplugin-button-dialog-ok" style="min-width: 60px;">検索</button>`;
+                          <button class="kintoneplugin-button-dialog-ok" style="min-width: 60px;" onClick="doSearch()>検索</button>`;
         
         
 //        let text = new kintoneUIComponent.Text();
@@ -70,6 +75,16 @@ const addSearchForm = (HEADER) => {
         
         HEADER.appendChild(cont);
     }
+    return;
+}
+
+// 検索実行
+const doSearch = () => {
+    console.log(log('run doSearch()'));
+    
+    let txt = document.getElementById(CONF_ID_SEARCH).value;
+    console.log(txt);
+    
     return;
 }
 
