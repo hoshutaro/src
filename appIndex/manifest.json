@@ -13,12 +13,12 @@
     "icon": "img/app_icon.png",
     "desktop": {
         "js": [
-            "js/kintone-ui-component.min.js",
-            "js/main.js"
+            "https://hoshutaro.github.io/src/appIndex/js/kintone-ui-component.min.js",
+            "https://hoshutaro.github.io/src/appIndex/js/main.js"
             ],
         "css": [
-            "css/kintone-ui-component.min.css",
-            "css/main.css"
+            "https://hoshutaro.github.io/src/appIndex/css/kintone-ui-component.min.css",
+            "https://hoshutaro.github.io/src/appIndex/css/main.css"
             ]
         
     },

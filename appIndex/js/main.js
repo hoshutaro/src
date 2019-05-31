@@ -15,27 +15,30 @@ const log = (str) => {
     
     return `${year}/${month}/${day} ${hour}:${minute}:${second}.${mSecond} ${str}`;
 }
-
-/**
- *  ヘッダースペース修正
- */
- const editHeaderSpace = () => {
-    console.log(log('run editHeaderSpace'));
-    let elm_header = kintone.app.getHeaderMenuSpaceElement();
+/***********************************************************************************************************************
+ *
+ * ヘッダースペース関連
+ * 
+ * ********************************************************************************************************************/
+ const editHeaderSpace = async (HEADER) => {
+    console.log(log('run editHeaderSpace()'));
     
-    elm_header.classList.add('header-row');
+    // 任意のCSSを適用したいのでクラスを追加
+    HEADER.classList.add('header-row');
     
     return;
  }
 
-/**
- *  簡易検索フォームの追加
- */
-const addSearchForm = () => {
+/***********************************************************************************************************************
+ *
+ * 検索機能関連
+ * 
+ * ********************************************************************************************************************/
+// 簡易検索フォームの追加
+const addSearchForm = (HEADER) => {
     console.log(log('run addSearchForm'));
-    let elm_header = kintone.app.getHeaderMenuSpaceElement();
     
-    if(elm_header != null){
+    if(HEADER != null){
         
         let text = new kintoneUIComponent.Text();
         let btn = new kintoneUIComponent.IconButton({type: 'right', color: 'blue'})
@@ -56,21 +59,29 @@ const addSearchForm = () => {
             return;
         });
         
-        elm_header.appendChild(df);
+        HEADER.appendChild(df);
 
     }
     return;
 }
 
-/**
- *  メイン処理
- */
+/***********************************************************************************************************************
+ *
+ * メイン処理
+ * 
+ * ********************************************************************************************************************/
 console.log(log('run main.js'));
 
 // レコード一覧画面
-kintone.events.on('app.record.index.show', (event) => {
-    editHeaderSpace();
-    addSearchForm();
+kintone.events.on('app.record.index.show', async (event) => {
+    console.log(log('run app.record.index.show'));
+    
+    const HEADER = kintone.app.getHeaderMenuSpaceElement();
+    
+    // ヘッダースペース修正
+    await editHeaderSpace(HEADER);
+    // 検索フォーム生成
+    await addSearchForm(HEADER);
 
     return event;
 });
