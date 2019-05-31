@@ -113,6 +113,25 @@ const addChangeColorConfig = () => {
     cont.innerHTML = `<div class="kintoneplugin-label">カラー変更機能</div>
                       <div class="kintoneplugin-title">条件式</div>`;
     
+    let elm = document.createElement('p');
+    
+    p.innerHTML = `<table class="kintoneplugin-table">
+                       <thead>
+                           <tr>
+                               <th class="kintoneplugin-table-th"><span class="title">優先順位</span></th>
+                               <th class="kintoneplugin-table-th"><span class="title">フィールド</span></th>
+                               <th class="kintoneplugin-table-th"><span class="title">条件式</span></th>
+                               <th class="kintoneplugin-table-th"><span class="title">値</span></th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                           <tr>
+                               <td>
+                               </td>
+                           </tr>
+                       </tbody>
+                   </table>`;
+    
     body.appendChild(cont);
     
     return;
