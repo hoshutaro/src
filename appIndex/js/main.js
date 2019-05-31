@@ -42,8 +42,9 @@ const addSearchForm = (HEADER) => {
         
         let cont = document.createElement('div');
         cont.innerHTML = `<div class="kintoneplugin-input-outer">
-                              <input class="kintoneplugin-input-text" type="text" placeholder="キーワード検索">
-                          </div>`;
+                              <input class="kintoneplugin-input-text" type="text" placeholder="検索文字を入力">
+                          </div>
+                          <button class="kintoneplugin-button-dialog-ok">検索</button>`;
         
         
 //        let text = new kintoneUIComponent.Text();
