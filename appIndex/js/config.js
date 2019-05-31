@@ -10,6 +10,21 @@ const BODY_ID   = 'main'; // 描画対象div
 const CONF_ID_KEY    = 'confkey'; // Kintone保存用ID
 const CONF_ID_SEARCH = 'search';  // 検索機能ID
 
+/**
+ *  ログ表示
+ */
+const log = (str) => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const day = now.getDate();
+    const hour = now.getHours();
+    const minute = now.getMinutes();
+    const second = now.getSeconds();
+    const mSecond = now.getMilliseconds();
+    
+    return `${year}/${month}/${day} ${hour}:${minute}:${second}.${mSecond} ${str}`;
+}
 
 /***********************************************************************************************************************
  *
@@ -44,66 +59,6 @@ const getFormFields = async () => {
     return result;
 }
 
-
-
-
-/**
- *  ログ表示
- */
-const log = (str) => {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = now.getMonth();
-    const day = now.getDate();
-    const hour = now.getHours();
-    const minute = now.getMinutes();
-    const second = now.getSeconds();
-    const mSecond = now.getMilliseconds();
-    
-    return `${year}/${month}/${day} ${hour}:${minute}:${second}.${mSecond} ${str}`;
-}
-
-
-
-/**
- * 検索対象フィールド生成
- */
-const addSearchTargetFields = (FIELDS) => {
-    console.log(log('run addSearchTargetFields'));
-    
-    let prop = FIELDS.properties;
-    let sp1 = document.getElementById('sp1');
-    
-    for(let n in prop) {
-        //console.log(`code: ${prop[n].code} type: ${prop[n].type}`);
-        
-        let arr = ['SINGLE_LINE_TEXT', 'MULTI_LINE_TEXT'];
-        if(arr.includes(prop[n].type)) {
-            // 要素生成
-            let elm = document.createElement('p');
-            let elmid = `search-${prop[n].code}`;
-            elm.innerHTML = `<div class="kintoneplugin-input-checkbox">
-                                 <span class="kintoneplugin-input-checkbox-item">
-                                     <input type="checkbox" name="checkbox" value="0" id="${elmid}" checked="">
-                                     <label for="${elmid}">${prop[n].label}</label>
-                                 </span>
-                             </div>`;
-            sp1.appendChild(elm);
-            config[`search-${prop[n].code}`] = '';
-            
-            // 初期値設定
-            console.log(`config: ${config_saved[elmid]}`);
-            
-        }
-
-    }
-    return;
-}
-
-
-
-
-
 /***********************************************************************************************************************
  *
  * 検索機能関連
@@ -130,8 +85,8 @@ const addSearchConfig = (FIELDS) => {
             let elmid = `search-${prop[n].code}`;
             elm.innerHTML = `<div class="kintoneplugin-input-checkbox">
                                  <span class="kintoneplugin-input-checkbox-item">
-                                     <input type="checkbox" name="${CONF_ID_SEARCH}" value="0" id="${elmid}">
-                                     <label for="${elmid}">${prop[n].label} (${prop[n].code})</label>
+                                     <input type="checkbox" name="${CONF_ID_SEARCH}" value="0" id="${prop[n].code}">
+                                     <label for="${prop[n].code}">${prop[n].label} (${prop[n].code})</label>
                                  </span>
                              </div>`;
             cont.appendChild(elm);
