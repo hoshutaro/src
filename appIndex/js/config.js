@@ -158,7 +158,7 @@ const setSavedConfig = (SAVEDCONFIG) => {
     // 検索機能
     let valSearch = SAVEDCONFIG[CONF_ID_SEARCH];
     for(let i=0; i<valSearch.length; i++){
-        console.log(document.getElementById(valSearch[i]));
+        document.getElementById(valSearch[i]).checked = true;
     }
     
     return;
