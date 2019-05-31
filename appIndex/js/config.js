@@ -149,7 +149,7 @@ const addSaveButton = () => {
 const saveConfig = () => {
     console.log(log('run saveConfig()'));
     
-    let config = {};
+    let config = {CONF_ID_SEARCH : []};
     
     // 検索対象フィールド
     let nodes = document.getElementsByName(CONF_ID_SEARCH);
