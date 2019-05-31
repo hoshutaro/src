@@ -76,7 +76,7 @@ console.log(log('run main.js'));
 kintone.events.on('app.record.index.show', async (event) => {
     console.log(log('run app.record.index.show'));
     
-    const HEADER = kintone.app.getHeaderMenuSpaceElement();
+    const HEADER = await kintone.app.getHeaderMenuSpaceElement();
     
     // ヘッダースペース修正
     await editHeaderSpace(HEADER);
