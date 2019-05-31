@@ -1,11 +1,13 @@
 'use strict';
 
 /**
- * 共有変数
+ * 固定値
  */
-const APP_ID = kintone.app.getId();
+const APP_ID    = kintone.app.getId();
 const PLUGIN_ID = 'bojikainnoigicndgjiadfanijcldabf';
-const BODY_ID = 'main';
+const BODY_ID   = 'main'; // 描画対象div
+
+const CONF_ID_SEARCH = 'search'; // 検索機能ID
 
 
 let config = {};
@@ -64,22 +66,7 @@ const addSearchTargetFields = (FIELDS) => {
     return;
 }
 
-/**
- * Config保存
- */
-const saveConfig = () => {
-    console.log(log('run saveConfig'));
-    for(let n in config){
-        console.log(document.getElementById(n));
-        if(document.getElementById(n).type === 'checkbox'){
-            config[n] = document.getElementById(n).checked.toString();
-        }
-    }
-    
-    kintone.plugin.app.setConfig(config);
-    
-    return;
-}
+
 
 /**
  * フォームフィールド一覧取得
@@ -121,7 +108,7 @@ const addSearchConfig = (FIELDS) => {
             let elmid = `search-${prop[n].code}`;
             elm.innerHTML = `<div class="kintoneplugin-input-checkbox">
                                  <span class="kintoneplugin-input-checkbox-item">
-                                     <input type="checkbox" name="checkbox" value="0" id="${elmid}" checked="">
+                                     <input type="checkbox" name="${CONF_ID_SEARCH}" value="0" id="${elmid}" checked="">
                                      <label for="${elmid}">${prop[n].label} (${prop[n].code})</label>
                                  </span>
                              </div>`;
@@ -138,9 +125,12 @@ const addSearchConfig = (FIELDS) => {
     return;
 }
 
-/**
- * 保存ボタン設置
- */
+/***********************************************************************************************************************
+ *
+ * プラグインコンフィグ関連
+ * 
+ * ********************************************************************************************************************/
+// 保存・キャンセルボタン設置
 const addSaveButton = () => {
     console.log(log('run addSaveButton()'));
     
@@ -155,9 +145,22 @@ const addSaveButton = () => {
     return;
 }
 
-/**
- * 非同期処理
- */
+// コンフィグ保存
+const saveConfig = () => {
+    console.log(log('run saveConfig()'));
+    
+    let config = {};
+    
+    // 検索対象フィールド
+    
+}
+
+/***********************************************************************************************************************
+ *
+ * メイン処理
+ * 
+ * ********************************************************************************************************************/
+// 非同期処理
 const asyncfunctions = async () => {
     console.log(log('run asyncfunctions()'));
     
@@ -167,16 +170,12 @@ const asyncfunctions = async () => {
     // 検索機能コンフィグ
     await addSearchConfig(FIELDS);
     
-    // 保存ボタン
+    // 保存ボタン設置
     await addSaveButton();
     
     return;
 }
 
-
-/**
- *  メイン処理
- */
+// メイン
 console.log(log('run config.js'));
-
 asyncfunctions();
