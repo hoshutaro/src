@@ -110,7 +110,8 @@ const doSearch = async () => {
     
     let txt = document.getElementById(CONF_ID_SEARCH).value;
     if(txt != ''){
-        const search_target = await getConfig()[CONF_ID_SEARCH];
+        const config = await getConfig();
+        const search_target = config[CONF_ID_SEARCH];
         let query = '?query=';
         
         for(let i=0; search_target.length; i++){
