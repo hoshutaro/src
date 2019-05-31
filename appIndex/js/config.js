@@ -131,6 +131,8 @@ const addChangeColorConfig = () => {
                            </tr>
                        </tbody>
                    </table>`;
+    cont.appendChild(p);
+    
     
     body.appendChild(cont);
     
