@@ -36,31 +36,38 @@ const log = (str) => {
  * ********************************************************************************************************************/
 // 簡易検索フォームの追加
 const addSearchForm = (HEADER) => {
-    console.log(log('run addSearchForm'));
+    console.log(log('run addSearchForm()'));
     
     if(HEADER != null){
         
-        let text = new kintoneUIComponent.Text();
-        let btn = new kintoneUIComponent.IconButton({type: 'right', color: 'blue'})
+        let cont = document.createElement('div');
+        cont.innerHTML = `<div class="kintoneplugin-input-outer">
+                              <input class="kintoneplugin-input-text" type="text">
+                          </div>`;
         
-        let df = document.createDocumentFragment();
-        df.appendChild(text.render());
-        df.appendChild(btn.render());
         
-        // 検索機能
-        btn.on('click', () => {
-            console.log(log(`search: ${text.getValue()}`));
-            if(text.getValue() != undefined){
-                let keyword = text.getValue();
-                let query = `?query=msbox like "${keyword}"`;
-                
-                document.location = `${location.origin}${location.pathname}${encodeURI(query)}`;
-            }
-            return;
-        });
+//        let text = new kintoneUIComponent.Text();
+//        let btn = new kintoneUIComponent.IconButton({type: 'right', color: 'blue'})
+//        
+//        let df = document.createDocumentFragment();
+//        df.appendChild(text.render());
+//        df.appendChild(btn.render());
+//        
+//        // 検索機能
+//        btn.on('click', () => {
+//            console.log(log(`search: ${text.getValue()}`));
+//            if(text.getValue() != undefined){
+//                let keyword = text.getValue();
+//                let query = `?query=msbox like "${keyword}"`;
+//                
+//                document.location = `${location.origin}${location.pathname}${encodeURI(query)}`;
+//            }
+//            return;
+//        });
+//        
+//        HEADER.appendChild(df);
         
-        HEADER.appendChild(df);
-
+        HEADER.appendChild(cont);
     }
     return;
 }
@@ -80,20 +87,15 @@ kintone.events.on('app.record.index.show', (event) => {
     
     // 非同期処理を制御
     appRecordIndexShow();
-//    const HEADER = await kintone.app.getHeaderMenuSpaceElement();
-//    
-//    // ヘッダースペース修正
-//    await editHeaderSpace(HEADER);
-//    // 検索フォーム生成
-//    await addSearchForm(HEADER);
 
     return event;
 });
 const appRecordIndexShow = async () => {
     const HEADER = await kintone.app.getHeaderMenuSpaceElement();
     
+    // ヘッダースペース修正
     await editHeaderSpace(HEADER);
-    
+    // 検索フォーム生成
     await addSearchForm(HEADER);
     
     return;
