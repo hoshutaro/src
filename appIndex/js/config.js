@@ -7,7 +7,8 @@ const APP_ID    = kintone.app.getId();
 const PLUGIN_ID = 'bojikainnoigicndgjiadfanijcldabf';
 const BODY_ID   = 'main'; // 描画対象div
 
-const CONF_ID_SEARCH = 'search'; // 検索機能ID
+const CONF_ID_KEY    = 'confkey'; // Kintone保存用ID
+const CONF_ID_SEARCH = 'search';  // 検索機能ID
 
 
 /***********************************************************************************************************************
@@ -18,8 +19,8 @@ const CONF_ID_SEARCH = 'search'; // 検索機能ID
 // コンフィグ取得
 const getConfig = async () => {
     console.log(log('run getConfig()'));
-    
-    let config = JSON.parse(kintone.plugin.app.getConfig('bojikainnoigicndgjiadfanijcldabf'));
+
+    let config = JSON.parse(kintone.plugin.app.getConfig('bojikainnoigicndgjiadfanijcldabf')[CONF_ID_KEY]);
     
     return config;
 }
@@ -180,8 +181,9 @@ const saveConfig = () => {
     }
     
     console.log(config);
-    kintone.plugin.app.setConfig(JSON.stringify(config, null, 4));
     
+    kintone.plugin.app.setConfig({[CONF_ID_KEY] : JSON.stringify(config, null, 4)});
+        
     return;
 }
 
