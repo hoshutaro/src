@@ -110,7 +110,7 @@ const addSearchTargetFields = (FIELDS) => {
  * 
  * ********************************************************************************************************************/
 // 検索コンフィグ追加
-const addSearchConfig = (FIELDS, SAVEDCONFIG) => {
+const addSearchConfig = (FIELDS) => {
     console.log(log('run addSearchConfig()'));
     
     let body = document.getElementById(BODY_ID);
@@ -139,15 +139,6 @@ const addSearchConfig = (FIELDS, SAVEDCONFIG) => {
 
         }
     }
-    
-    // 既存設定値を反映
-    let defVal = SAVEDCONFIG[CONF_ID_SEARCH];
-    if(defVal != undefined){
-        for(let i=0; i<defVal.length; i++){
-            console.log(document.getElementById(defVal[i]));
-            //document.getElementById(defVal[i]).checked = true;
-        }
-    }
 
     body.appendChild(cont);
     
@@ -159,6 +150,17 @@ const addSearchConfig = (FIELDS, SAVEDCONFIG) => {
  * プラグインコンフィグ関連
  * 
  * ********************************************************************************************************************/
+// 既定値設定
+const setSavedConfig = (SAVEDCONFIG) => {
+    console.log(log('run setSavedConfig()'));
+    console.log(SAVEDCONFIG);
+    
+    // 検索機能
+    
+    
+    return;
+}
+ 
 // 保存・キャンセルボタン設置
 const addSaveButton = () => {
     console.log(log('run addSaveButton()'));
@@ -208,8 +210,11 @@ const asyncfunctions = async () => {
     const SAVEDCONFIG = await getConfig();
     const FIELDS = await getFormFields();
     
-    // 検索機能コンフィグ
-    await addSearchConfig(FIELDS, SAVEDCONFIG);
+    // 検索機能コンフィグ設置
+    await addSearchConfig(FIELDS);
+    
+    // 既定値入力
+    await setSavedConfig(SAVEDCONFIG);
     
     // 保存ボタン設置
     await addSaveButton();
