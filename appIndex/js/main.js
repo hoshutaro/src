@@ -76,12 +76,12 @@ console.log(log('run main.js'));
 kintone.events.on('app.record.index.show', async (event) => {
     console.log(log('run app.record.index.show'));
     
-    const HEADER = await kintone.app.getHeaderMenuSpaceElement();
-    
-    // ヘッダースペース修正
-    await editHeaderSpace(HEADER);
-    // 検索フォーム生成
-    await addSearchForm(HEADER);
+//    const HEADER = await kintone.app.getHeaderMenuSpaceElement();
+//    
+//    // ヘッダースペース修正
+//    await editHeaderSpace(HEADER);
+//    // 検索フォーム生成
+//    await addSearchForm(HEADER);
 
     return event;
 });
