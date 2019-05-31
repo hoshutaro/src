@@ -105,12 +105,12 @@ const addSearchForm = (HEADER) => {
 }
 
 // 検索実行
-const doSearch = () => {
+const doSearch = async () => {
     console.log(log('run doSearch()'));
     
     let txt = document.getElementById(CONF_ID_SEARCH).value;
     if(txt != ''){
-        const search_target = getConfig()[CONF_ID_SEARCH];
+        const search_target = await getConfig()[CONF_ID_SEARCH];
         let query = '?query=';
         
         for(let i=0; search_target.length; i++){
