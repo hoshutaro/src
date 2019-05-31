@@ -104,7 +104,7 @@ const addSearchConfig = (FIELDS) => {
  * 
  * ********************************************************************************************************************/
 // カラー変更コンフィグ追加
-const addChangeColorConfig = () => {
+const addChangeColorConfig = (FIELDS) => {
     console.log(log('run addChangeColor()'));
     
     let body = document.getElementById(BODY_ID);
@@ -112,6 +112,13 @@ const addChangeColorConfig = () => {
     
     cont.innerHTML = `<div class="kintoneplugin-label">カラー変更機能</div>
                       <div class="kintoneplugin-title">条件式</div>`;
+    
+    let options = '';
+    let prop = FIELDS.properties;
+    
+    for(let n in prop) {
+        options += `<option>${prop[n].label}</option>`;
+    }
     
     let elm = document.createElement('p');
     
@@ -127,6 +134,23 @@ const addChangeColorConfig = () => {
                        <tbody>
                            <tr>
                                <td>
+                                   ####
+                               </td>
+                               <td>
+                                   <div class="kintoneplugin-select-outer">
+                                       <div class="kintoneplugin-select">
+                                           <select>
+                                               ${options}
+                                           </select>
+                                       </div>
+                                   </div>
+                               </td>
+                               <td>
+                               </td>
+                               <td>
+                                   <div class="kintoneplugin-input-outer">
+                                       <input class="kintoneplugin-input-text" type="text">
+                                   </div>
                                </td>
                            </tr>
                        </tbody>
@@ -210,7 +234,7 @@ const asyncfunctions = async () => {
     await addSearchConfig(FIELDS);
 
     // カラー変更機能コンフィグ設置
-    await addChangeColorConfig();
+    await addChangeColorConfig(FIELDS);
     
     // 既定値入力
     await setSavedConfig(SAVEDCONFIG);
