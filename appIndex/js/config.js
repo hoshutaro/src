@@ -117,7 +117,7 @@ const addChangeColorConfig = (FIELDS) => {
     let prop = FIELDS.properties;
     
     for(let n in prop) {
-        options += `<option>${prop[n].label}</option>`;
+        options += `<option id="${prop[n].code}">${prop[n].label} (${prop[n].code})</option>`;
     }
     
     let elm = document.createElement('p');
@@ -134,7 +134,7 @@ const addChangeColorConfig = (FIELDS) => {
                        <tbody>
                            <tr>
                                <td>
-                                   ####
+                                   <div class="kintoneplugin-title">####</div>
                                </td>
                                <td>
                                    <div class="kintoneplugin-select-outer">
@@ -146,6 +146,15 @@ const addChangeColorConfig = (FIELDS) => {
                                    </div>
                                </td>
                                <td>
+                                  <div class="kintoneplugin-select-outer">
+                                       <div class="kintoneplugin-select">
+                                           <select>
+                                               <option>=</option>
+                                               <option>></option>
+                                               <option><</option>
+                                           </select>
+                                       </div>
+                                   </div>
                                </td>
                                <td>
                                    <div class="kintoneplugin-input-outer">
