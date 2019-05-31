@@ -114,7 +114,7 @@ const doSearch = async () => {
         const search_target = config[CONF_ID_SEARCH];
         let query = '?query=';
         
-        for(let i=0; search_target.length; i++){
+        for(let i=0; i<search_target.length; i++){
             if(i>0){query += ' or ';}
             query += `${search_target[i]} like "${txt}"`;
         }
