@@ -115,7 +115,7 @@ const addChangeColorConfig = () => {
     
     let elm = document.createElement('p');
     
-    p.innerHTML = `<table class="kintoneplugin-table">
+    elm.innerHTML = `<table class="kintoneplugin-table">
                        <thead>
                            <tr>
                                <th class="kintoneplugin-table-th"><span class="title">優先順位</span></th>
