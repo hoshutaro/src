@@ -100,6 +100,26 @@ const addSearchConfig = (FIELDS) => {
 
 /***********************************************************************************************************************
  *
+ * カラー変更機能関連
+ * 
+ * ********************************************************************************************************************/
+// カラー変更コンフィグ追加
+const addChangeColorConfig = () => {
+    console.log(log('run addChangeColor()'));
+    
+    let body = document.getElementById(BODY_ID);
+    let cont = document.createElement('div');
+    
+    cont.innerHTML = `<div class="kintoneplugin-label">カラー変更機能</div>
+                      <div class="kintoneplugin-title">条件式</div>`;
+    
+    body.appendChild(cont);
+    
+    return;
+}
+
+/***********************************************************************************************************************
+ *
  * プラグインコンフィグ関連
  * 
  * ********************************************************************************************************************/
@@ -168,6 +188,9 @@ const asyncfunctions = async () => {
     
     // 検索機能コンフィグ設置
     await addSearchConfig(FIELDS);
+
+    // カラー変更機能コンフィグ設置
+    await addChangeColorConfig();
     
     // 既定値入力
     await setSavedConfig(SAVEDCONFIG);
