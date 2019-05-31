@@ -144,6 +144,7 @@ const addSearchConfig = (FIELDS, SAVEDCONFIG) => {
     let defVal = SAVEDCONFIG[CONF_ID_SEARCH];
     if(defVal != undefined){
         for(let i=0; i<defVal.length; i++){
+            console.log(document.getElementById(defVal[i]));
             //document.getElementById(defVal[i]).checked = true;
         }
     }
