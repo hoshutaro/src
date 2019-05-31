@@ -72,10 +72,14 @@ const addSearchForm = (HEADER) => {
  * ********************************************************************************************************************/
 console.log(log('run main.js'));
 
+
+
 // レコード一覧画面
-kintone.events.on('app.record.index.show', async (event) => {
+kintone.events.on('app.record.index.show', (event) => {
     console.log(log('run app.record.index.show'));
     
+    // 非同期処理を制御
+    appRecordIndexShow();
 //    const HEADER = await kintone.app.getHeaderMenuSpaceElement();
 //    
 //    // ヘッダースペース修正
@@ -85,3 +89,12 @@ kintone.events.on('app.record.index.show', async (event) => {
 
     return event;
 });
+const appRecordIndexShow = async () => {
+    const HEADER = await kintone.app.getHeaderMenuSpaceElement();
+    
+    await editHeaderSpace(HEADER);
+    
+    await addSearchForm(HEADER);
+    
+    return;
+}
